@@ -1,6 +1,7 @@
 package de.dannyb.moviesapp.movies.view
 
 import android.view.View
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import de.dannyb.moviesapp.common.view.BaseObservableViewMvp
 import de.dannyb.moviesapp.data.Movie
@@ -24,8 +25,8 @@ class MoviesViewImpl(
         }
     }
 
-    override fun setMovies(movies: List<Movie>) {
-        moviesAdapter.setMovies(movies)
+    override suspend fun addMovies(pagingData: PagingData<Movie>) {
+        moviesAdapter.submitData(pagingData)
     }
 
     companion object {

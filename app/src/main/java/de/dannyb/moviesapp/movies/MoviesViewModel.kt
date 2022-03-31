@@ -1,22 +1,22 @@
 package de.dannyb.moviesapp.movies
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import de.dannyb.moviesapp.data.Movie
-import de.dannyb.moviesapp.networking.MoviesDbService
-import kotlinx.coroutines.launch
+import de.dannyb.moviesapp.movies.paging.MoviesPagingDataSource
+import kotlinx.coroutines.flow.Flow
 
 class MoviesViewModel(
-    private val moviesDbService: MoviesDbService
+    private val moviesPagingDataSource: MoviesPagingDataSource
 ) : ViewModel() {
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> get() = _movies
-
-    fun fetchMovies() = viewModelScope.launch {
-        val movies = moviesDbService.discover()
-        _movies.postValue(movies.results)
-    }
+    val moviesFlow: Flow<PagingData<Movie>> =
+        Pager(
+            config = PagingConfig(pageSize = 20, prefetchDistance = 5),
+            pagingSourceFactory = { moviesPagingDataSource }
+        ).flow.cachedIn(viewModelScope)
 }

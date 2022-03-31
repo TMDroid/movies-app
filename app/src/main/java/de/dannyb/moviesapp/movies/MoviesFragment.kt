@@ -3,12 +3,14 @@ package de.dannyb.moviesapp.movies
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import de.dannyb.moviesapp.R
 import de.dannyb.moviesapp.common.viewBinding
 import de.dannyb.moviesapp.data.Movie
 import de.dannyb.moviesapp.databinding.FragmentMoviesBinding
 import de.dannyb.moviesapp.movies.view.MoviesViewImpl
 import de.dannyb.moviesapp.movies.view.MoviesViewMvp
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -24,12 +26,14 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MoviesViewMvp.Listene
         viewMvp = MoviesViewImpl(binding)
 
         observeLiveData()
-        viewModel.fetchMovies()
     }
 
     private fun observeLiveData() {
-        viewModel.movies.observe(viewLifecycleOwner) {
-            viewMvp.setMovies(it)
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+
+            viewModel.moviesFlow.collectLatest { pagingData ->
+                viewMvp.addMovies(pagingData)
+            }
         }
     }
 

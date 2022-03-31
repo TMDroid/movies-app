@@ -1,5 +1,6 @@
 package de.dannyb.moviesapp.movies.view
 
+import androidx.paging.PagingData
 import de.dannyb.moviesapp.common.view.ObservableViewMvp
 import de.dannyb.moviesapp.common.view.ViewMvp
 import de.dannyb.moviesapp.data.Movie
@@ -12,5 +13,5 @@ interface MoviesViewMvp : ObservableViewMvp<MoviesViewMvp.Listener> {
 
     }
 
-    fun setMovies(movies: List<Movie>)
+    suspend fun addMovies(pagingData: PagingData<Movie>)
 }

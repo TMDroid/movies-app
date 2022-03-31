@@ -10,15 +10,15 @@ class MoviesViewHolder(
     private val binding: RowMovieBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(movie: Movie, movieClickListener: (Movie) -> Unit) {
-        binding.movieTitle.text = movie.title
+    fun bind(movie: Movie, movieClickListener: (Movie) -> Unit) = with(binding) {
+        movieTitle.text = movie.title
 
-        Glide.with(binding.movieCover.context)
+        Glide.with(movieCover.context)
             .load("${BASE_COVER_PATH}${movie.posterPath}")
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(binding.movieCover)
+            .into(movieCover)
 
-        binding.root.setOnClickListener {
+        root.setOnClickListener {
             movieClickListener.invoke(movie)
         }
     }
