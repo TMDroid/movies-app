@@ -29,6 +29,6 @@ class MoviesViewImpl(
     }
 
     companion object {
-        private const val GRID_COUNT = 5
+        private const val GRID_COUNT = 4
     }
 }

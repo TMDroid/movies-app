@@ -7,6 +7,6 @@ import org.koin.dsl.module
 object MoviesModule : ModuleDefinition {
     override fun invoke() = module {
 
-        viewModel { MoviesViewModel() }
+        viewModel { MoviesViewModel(get()) }
     }
 }

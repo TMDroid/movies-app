@@ -1,10 +1,11 @@
 package de.dannyb.moviesapp
 
 import android.app.Application
+import de.dannyb.moviesapp.common.ModuleDefinition
 import de.dannyb.moviesapp.movies.MoviesModule
+import de.dannyb.moviesapp.networking.NetworkingModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.core.module.Module
 import timber.log.Timber
 
 class MoviesApp : Application() {
@@ -18,11 +19,12 @@ class MoviesApp : Application() {
 
         startKoin {
             androidContext(this@MoviesApp)
-            modules(getKoinModules())
+            modules(getKoinModules().map { it.invoke() })
         }
     }
 
-    private fun getKoinModules(): List<Module> = listOf(
-        MoviesModule
-    ).map { it.invoke() }
+    private fun getKoinModules(): List<ModuleDefinition> = listOf(
+        MoviesModule,
+        NetworkingModule,
+    )
 }
