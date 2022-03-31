@@ -3,6 +3,7 @@ package de.dannyb.moviesapp.movies.view
 import android.view.View
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
+import de.dannyb.moviesapp.R
 import de.dannyb.moviesapp.common.view.BaseObservableViewMvp
 import de.dannyb.moviesapp.data.Movie
 import de.dannyb.moviesapp.databinding.FragmentMoviesBinding
@@ -23,6 +24,9 @@ class MoviesViewImpl(
             layoutManager = GridLayoutManager(rootView.context, GRID_COUNT)
             adapter = moviesAdapter
         }
+
+        binding.toolbar.title = rootView.context
+            .getString(R.string.movies__title)
     }
 
     override suspend fun addMovies(pagingData: PagingData<Movie>) {
@@ -30,6 +34,6 @@ class MoviesViewImpl(
     }
 
     companion object {
-        private const val GRID_COUNT = 4
+        private const val GRID_COUNT = 3
     }
 }
