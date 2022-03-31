@@ -10,6 +10,9 @@ interface MoviesDbService {
     @GET("discover/movie")
     suspend fun discover(
         @Query("page") page: Int,
-        @Query("language") language: String = Locale.getDefault().toLanguageTag()
+        @Query("language") language: String = Locale.getDefault().toLanguageTag(),
+        @Query("sort_by") sortBy: String = "release_date.desc",
     ): DiscoverMoviesResponse
+
+
 }

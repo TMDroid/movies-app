@@ -11,7 +11,7 @@ data class Movie(
     @SerializedName("original_title") var originalTitle: String,
     @SerializedName("overview") var overview: String,
     @SerializedName("popularity") var popularity: Double,
-    @SerializedName("poster_path") var posterPath: String,
+    @SerializedName("poster_path") var posterPath: String?,
     @SerializedName("release_date") var releaseDate: String,
     @SerializedName("title") var title: String,
     @SerializedName("video") var video: Boolean,
