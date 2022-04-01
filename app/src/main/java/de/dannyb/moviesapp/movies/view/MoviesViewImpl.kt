@@ -5,7 +5,7 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import de.dannyb.moviesapp.R
 import de.dannyb.moviesapp.common.view.BaseObservableViewMvp
-import de.dannyb.moviesapp.data.Movie
+import de.dannyb.moviesapp.data.DiscoverMovieModel
 import de.dannyb.moviesapp.databinding.FragmentMoviesBinding
 
 class MoviesViewImpl(
@@ -29,7 +29,7 @@ class MoviesViewImpl(
             .getString(R.string.movies__title)
     }
 
-    override suspend fun addMovies(pagingData: PagingData<Movie>) {
+    override suspend fun addMovies(pagingData: PagingData<DiscoverMovieModel>) {
         moviesAdapter.submitData(pagingData)
     }
 

@@ -2,6 +2,7 @@ package de.dannyb.moviesapp
 
 import android.app.Application
 import de.dannyb.moviesapp.common.ModuleDefinition
+import de.dannyb.moviesapp.movie_details.MovieDetailsModule
 import de.dannyb.moviesapp.movies.MoviesModule
 import de.dannyb.moviesapp.networking.NetworkingModule
 import org.koin.android.ext.koin.androidContext
@@ -25,6 +26,7 @@ class MoviesApp : Application() {
 
     private fun getKoinModules(): List<ModuleDefinition> = listOf(
         MoviesModule,
+        MovieDetailsModule,
         NetworkingModule,
     )
 }

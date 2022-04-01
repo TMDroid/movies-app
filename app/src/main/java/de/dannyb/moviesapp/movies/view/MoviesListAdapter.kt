@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import de.dannyb.moviesapp.data.Movie
+import de.dannyb.moviesapp.data.DiscoverMovieModel
 import de.dannyb.moviesapp.databinding.RowMovieBinding
 
 class MoviesListAdapter(
-    private val movieClickListener: (Movie) -> Unit
-) : PagingDataAdapter<Movie, MoviesViewHolder>(MovieComparator) {
+    private val movieClickListener: (DiscoverMovieModel) -> Unit
+) : PagingDataAdapter<DiscoverMovieModel, MoviesViewHolder>(MovieComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         return MoviesViewHolder(
@@ -26,11 +26,11 @@ class MoviesListAdapter(
         }
     }
 
-    private object MovieComparator : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie) =
+    private object MovieComparator : DiffUtil.ItemCallback<DiscoverMovieModel>() {
+        override fun areItemsTheSame(oldItem: DiscoverMovieModel, newItem: DiscoverMovieModel) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie) =
+        override fun areContentsTheSame(oldItem: DiscoverMovieModel, newItem: DiscoverMovieModel) =
             oldItem == newItem
     }
 }

@@ -2,17 +2,17 @@ package de.dannyb.moviesapp.movies.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import de.dannyb.moviesapp.data.Movie
+import de.dannyb.moviesapp.data.DiscoverMovieModel
 import de.dannyb.moviesapp.networking.MoviesDbService
 
 class MoviesPagingDataSource(
     private val moviesDbService: MoviesDbService
-) : PagingSource<Int, Movie>() {
-    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? {
+) : PagingSource<Int, DiscoverMovieModel>() {
+    override fun getRefreshKey(state: PagingState<Int, DiscoverMovieModel>): Int? {
         return null
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DiscoverMovieModel> {
         val page = params.key ?: 1
 
         return try {

@@ -8,7 +8,7 @@ import org.koin.dsl.module
 object MoviesModule : ModuleDefinition {
     override fun invoke() = module {
 
-        viewModel { MoviesViewModel(get()) }
+        viewModel { MoviesViewModel(get(), get()) }
 
         factory { MoviesPagingDataSource(get()) }
     }

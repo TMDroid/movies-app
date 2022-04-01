@@ -1,12 +1,15 @@
 package de.dannyb.moviesapp.movies
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import de.dannyb.moviesapp.R
+import de.dannyb.moviesapp.common.ext.getPrimaryDarkColor
 import de.dannyb.moviesapp.common.viewBinding
-import de.dannyb.moviesapp.data.Movie
+import de.dannyb.moviesapp.data.DiscoverMovieModel
 import de.dannyb.moviesapp.databinding.FragmentMoviesBinding
 import de.dannyb.moviesapp.movies.view.MoviesViewImpl
 import de.dannyb.moviesapp.movies.view.MoviesViewMvp
@@ -26,10 +29,21 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MoviesViewMvp.Listene
         viewMvp = MoviesViewImpl(binding)
 
         observeLiveData()
+        setStatusBarColor()
+    }
+
+    private fun setStatusBarColor() {
+        requireActivity().window.statusBarColor = requireContext().getPrimaryDarkColor()
     }
 
     private fun observeLiveData() {
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+        viewModel.selectedMovie.observe(this) {
+            findNavController().navigate(
+                MoviesFragmentDirections.actionMoviesFragmentToMovieDetailsFragment(it)
+            )
+        }
+
+        lifecycleScope.launchWhenResumed {
 
             viewModel.moviesFlow.collectLatest { pagingData ->
                 viewMvp.addMovies(pagingData)
@@ -47,7 +61,8 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MoviesViewMvp.Listene
         viewMvp.unregisterListener(this)
     }
 
-    override fun onMovieClicked(movie: Movie) {
+    override fun onMovieClicked(movie: DiscoverMovieModel) {
         Timber.i("selected movie $movie")
+        viewModel.selectMovie(movie.id)
     }
 }

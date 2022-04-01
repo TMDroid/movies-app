@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">app</string>
     <string name="movies__title">Discover Movies</string>
+    <string name="movie_details__title">Movie Details</string>
+    <string name="lipsum">A tech worker with agoraphobia discovers recorded evidence of a violent crime but is met with resistance when she tries to report it. Seeking justice, she must do the thing she fears the most: she must leave her apartment.</string>
+    <string name="dummy_movie_title">Kimi</string>
+    <string name="reviews">Reviews</string>
+    <string name="movie_year__label">Year: %1$s</string>
+    <string name="movie_rating__label">Rating: %1$s / 10</string>
+    <string name="movie_genres__label">Genres: %1$s</string>
 </resources>
