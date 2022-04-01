@@ -31,6 +31,6 @@ class MoviesViewModel(
 
     fun selectMovie(id: Int) = viewModelScope.launch {
         val details = moviesDbService.getDetails(id)
-        _selectedMovie.value = details
+        _selectedMovie.postValue(details)
     }
 }

@@ -8,11 +8,11 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class DiscoverMovieModel(
-    @SerializedName("id") var id: Int,
-    @SerializedName("title") var title: String,
-    @SerializedName("poster_path") private var posterPath: String?,
-    @SerializedName("release_date") var releaseDate: String?,
-    @SerializedName("vote_average") var voteAverage: Double,
+    @SerializedName("id") val id: Int,
+    @SerializedName("title") val title: String,
+    @SerializedName("poster_path") private val posterPath: String?,
+    @SerializedName("release_date") val releaseDate: String?,
+    @SerializedName("vote_average") val voteAverage: Double,
 ) : Parcelable {
     val poster: Any
         get() {

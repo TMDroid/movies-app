@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import de.dannyb.moviesapp.R
 import de.dannyb.moviesapp.common.viewBinding
 import de.dannyb.moviesapp.databinding.FragmentMovieDetailsBinding
 import de.dannyb.moviesapp.movie_details.view.MovieDetailsViewImpl
 import de.dannyb.moviesapp.movie_details.view.MovieDetailsViewMvp
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailsFragment :
@@ -29,7 +30,7 @@ class MovieDetailsFragment :
         super.onViewCreated(view, savedInstanceState)
         viewMvp = MovieDetailsViewImpl(binding)
 
-        setupToolbar()
+        viewMvp.setupToolbar(requireActivity() as AppCompatActivity, this)
         setTransparentStatusBar()
 
         observeLiveData()
@@ -44,6 +45,12 @@ class MovieDetailsFragment :
         viewModel.movie.observe(viewLifecycleOwner) {
             viewMvp.displaySelectedMovie(it)
         }
+
+        lifecycleScope.launchWhenResumed {
+            viewModel.reviewsFlow.collectLatest { pagingData ->
+                viewMvp.addReviews(pagingData)
+            }
+        }
     }
 
     override fun onResume() {
@@ -54,19 +61,5 @@ class MovieDetailsFragment :
     override fun onPause() {
         super.onPause()
         viewMvp.unregisterListener(this)
-    }
-
-    private fun setupToolbar() {
-        with((requireActivity() as AppCompatActivity)) {
-            with(binding.appBar.detailToolbar) {
-                setSupportActionBar(this)
-                supportActionBar?.setDisplayHomeAsUpEnabled(true)
-                supportActionBar?.title = ""
-
-                setNavigationOnClickListener {
-                    findNavController().navigateUp()
-                }
-            }
-        }
     }
 }

@@ -6,5 +6,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class MovieGenreModel(
     val id: Int,
-    val name: String
-): Parcelable
+    val name: String,
+) : Parcelable

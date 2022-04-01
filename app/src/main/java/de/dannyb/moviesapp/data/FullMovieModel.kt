@@ -7,15 +7,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FullMovieModel(
-    @SerializedName("id") var id: Int,
-    @SerializedName("title") var title: String,
-    @SerializedName("tagline") var tagline: String,
-    @SerializedName("overview") var overview: String,
-    @SerializedName("genres") var genres: List<MovieGenreModel>,
-    @SerializedName("backdrop_path") private var backdropPath: String?,
-    @SerializedName("poster_path") private var posterPath: String?,
-    @SerializedName("vote_average") var votes: Double,
-    @SerializedName("release_date") var releaseDate: String,
+    @SerializedName("id") val id: Int,
+    @SerializedName("title") val title: String,
+    @SerializedName("tagline") val tagline: String,
+    @SerializedName("overview") val overview: String,
+    @SerializedName("genres") val genres: List<MovieGenreModel>,
+    @SerializedName("backdrop_path") private val backdropPath: String?,
+    @SerializedName("poster_path") private val posterPath: String?,
+    @SerializedName("vote_average") val votes: Double,
+    @SerializedName("release_date") val releaseDate: String,
 ) : Parcelable {
 
     val poster: Any
