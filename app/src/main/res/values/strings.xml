@@ -9,4 +9,6 @@
     <string name="movie_rating__label">Rating: %1$s / 10</string>
     <string name="movie_genres__label">Genres: %1$s</string>
     <string name="movies_search__hint">Search...</string>
+    <string name="menu_movies__latest">Latest</string>
+    <string name="menu_movies__popular">Most Popular</string>
 </resources>

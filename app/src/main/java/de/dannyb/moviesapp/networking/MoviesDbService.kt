@@ -14,7 +14,7 @@ interface MoviesDbService {
     suspend fun discover(
         @Query("page") page: Int,
         @Query("language") language: String = Locale.getDefault().toLanguageTag(),
-//        @Query("sort_by") sortBy: String = "release_date.desc",
+        @Query("sort_by") sortBy: String,
     ): DiscoverMoviesResponse
 
     @GET("movie/{id}")

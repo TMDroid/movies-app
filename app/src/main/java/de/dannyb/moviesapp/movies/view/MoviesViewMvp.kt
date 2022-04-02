@@ -11,6 +11,8 @@ interface MoviesViewMvp : ObservableViewMvp<MoviesViewMvp.Listener> {
 
         fun onMovieClicked(movie: DiscoverMovieModel)
 
+        fun loadMoviesType(type: MoviesType)
+
     }
 
     suspend fun addMovies(pagingData: PagingData<DiscoverMovieModel>)

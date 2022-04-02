@@ -34,7 +34,6 @@ class MoviesViewImpl(
     }
 
     private fun setupSearchBar() {
-
         configureSearchBarTitle()
         with(binding.floatingSearchView) {
             setOnQueryChangeListener { _, newQuery -> configureSuggestions(newQuery) }
@@ -42,6 +41,8 @@ class MoviesViewImpl(
             setOnFocusChangeListener(object : FloatingSearchView.OnFocusChangeListener {
                 override fun onFocus() {
                     configureSuggestions()
+                    setSearchBarTitle("")
+                    setSearchText("")
                 }
 
                 override fun onFocusCleared() {
@@ -63,6 +64,16 @@ class MoviesViewImpl(
                     println("Searched for $currentQuery")
                 }
             })
+
+            inflateOverflowMenu(R.menu.menu_movies)
+            setOnMenuItemClickListener { item ->
+                when(item.itemId) {
+                    R.id.load_movies_latest ->
+                        listeners.forEach { it.loadMoviesType(MoviesType.LATEST) }
+                    R.id.load_movies_most_popular ->
+                        listeners.forEach { it.loadMoviesType(MoviesType.MOST_POPULAR) }
+                }
+            }
         }
     }
 

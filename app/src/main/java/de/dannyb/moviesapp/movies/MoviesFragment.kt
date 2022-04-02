@@ -11,6 +11,7 @@ import de.dannyb.moviesapp.common.ext.getPrimaryDarkColor
 import de.dannyb.moviesapp.common.viewBinding
 import de.dannyb.moviesapp.data.DiscoverMovieModel
 import de.dannyb.moviesapp.databinding.FragmentMoviesBinding
+import de.dannyb.moviesapp.movies.view.MoviesType
 import de.dannyb.moviesapp.movies.view.MoviesViewImpl
 import de.dannyb.moviesapp.movies.view.MoviesViewMvp
 import kotlinx.coroutines.flow.collectLatest
@@ -64,5 +65,9 @@ class MoviesFragment : Fragment(R.layout.fragment_movies), MoviesViewMvp.Listene
     override fun onMovieClicked(movie: DiscoverMovieModel) {
         Timber.i("selected movie $movie")
         viewModel.selectMovie(movie.id)
+    }
+
+    override fun loadMoviesType(type: MoviesType) {
+        viewModel.setMoviesType(type)
     }
 }
