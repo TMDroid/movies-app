@@ -59,6 +59,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
+    // Search View
+    implementation 'com.github.arimorty:floatingsearchview:2.1.1'
+
     // Paging
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
 

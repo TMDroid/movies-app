@@ -1,6 +1,7 @@
 package de.dannyb.moviesapp.data
 
 import android.os.Parcelable
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion
 import com.google.gson.annotations.SerializedName
 import de.dannyb.moviesapp.R
 import de.dannyb.moviesapp.data.FullMovieModel.Companion.BASE_COVER_PATH
@@ -13,7 +14,7 @@ data class DiscoverMovieModel(
     @SerializedName("poster_path") private val posterPath: String?,
     @SerializedName("release_date") val releaseDate: String?,
     @SerializedName("vote_average") val voteAverage: Double,
-) : Parcelable {
+) : Parcelable, SearchSuggestion {
     val poster: Any
         get() {
             return if (posterPath != null) {
@@ -22,4 +23,8 @@ data class DiscoverMovieModel(
                 R.drawable.movie_cover_placeholder
             }
         }
+
+    override fun getBody(): String {
+        return title
+    }
 }
